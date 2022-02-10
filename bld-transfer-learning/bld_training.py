@@ -132,12 +132,12 @@ model.load_weights(filepath='mask_rcnn_coco.h5',
 # print(train_dataset)
 filepath="weights-new4_no_data_improvement-{epoch:02d}.h5"
 checkpoint = keras.callbacks.ModelCheckpoint(filepath, save_weights_only=True,verbose=1,
-    save_best_only=False, mode='auto', period=1)
+    save_best_only=False, mode='auto', period=5)
 
 model.train(train_dataset=train_dataset,
             val_dataset=validation_dataset,
             learning_rate=kangaroo_config.LEARNING_RATE,
-            epochs=30,
+            epochs=15,
             layers='heads')
 #
 model_path = 'test.h5'
