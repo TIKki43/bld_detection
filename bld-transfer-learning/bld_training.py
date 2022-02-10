@@ -104,17 +104,17 @@ class KangarooConfig(mrcnn.config.Config):
     
     NUM_CLASSES = 4
 
-    STEPS_PER_EPOCH = 2
+    STEPS_PER_EPOCH = 60
 
 # Train
 train_dataset = KangarooDataset()
-train_dataset.load_dataset(dataset_dir='nn_data', is_train=True)
+train_dataset.load_dataset(dataset_dir='aug_all', is_train=True)
 
 train_dataset.prepare()
 
 # Validation
 validation_dataset = KangarooDataset()
-validation_dataset.load_dataset(dataset_dir='nn_data', is_train=True)
+validation_dataset.load_dataset(dataset_dir='aug_all', is_train=True)
 validation_dataset.prepare()
 
 # Model Configuration
@@ -130,15 +130,15 @@ model.load_weights(filepath='mask_rcnn_coco.h5',
                    exclude=["mrcnn_class_logits", "mrcnn_bbox_fc",  "mrcnn_bbox", "mrcnn_mask"])
 
 # print(train_dataset)
-# filepath="weights-new4_no_data_improvement-{epoch:02d}.h5"
-# checkpoint = keras.callbacks.ModelCheckpoint(filepath, save_weights_only=True,verbose=1,
-#     save_best_only=False, mode='auto', period=1)
+filepath="weights-new4_no_data_improvement-{epoch:02d}.h5"
+checkpoint = keras.callbacks.ModelCheckpoint(filepath, save_weights_only=True,verbose=1,
+    save_best_only=False, mode='auto', period=1)
 
 model.train(train_dataset=train_dataset,
             val_dataset=validation_dataset,
             learning_rate=kangaroo_config.LEARNING_RATE,
-            epochs=1,
+            epochs=30,
             layers='heads')
 #
-model_path = 'C:\\Users\\Timur\\Desktop\\Projects\\Mask-RCNN-TF2-master\\kangaroo-transfer-learning\\trash.h5'
+model_path = 'test.h5'
 model.keras_model.save_weights(model_path)
