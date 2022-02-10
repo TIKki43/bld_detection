@@ -24,10 +24,10 @@ class KangarooDataset(mrcnn.utils.Dataset):
         for filename in os.listdir(images_dir):
             image_id = filename[:-4]
 
-            if is_train and int(image_id) >= 295:
+            if is_train and int(image_id) >= 296:
                 continue
 
-            if not is_train and int(image_id) < 295:
+            if not is_train and int(image_id) < 296:
                 continue
 
             img_path = images_dir + filename
